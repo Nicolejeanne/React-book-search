@@ -5,9 +5,9 @@ export default {
   getBooks: function() {
     return axios.get("/api/books");
   },
-  // getGoogle: function(title){
-  //   return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${title}&key=${process.env.REACT_APP_API_KEY}`)
-  // },
+  getGoogle: function(title){
+    return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${title}&key=${process.env.REACT_APP_API_KEY}`)
+  },
   // Gets the book with the given id
   getBook: function(id) {
     return axios.get("/api/books/" + id);

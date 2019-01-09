@@ -11,6 +11,7 @@ import ViewBtn from "../components/ViewBtn";
 class Books extends Component {
   state = {
     books: [],
+    searchResults: [],
     title: "",
     author: "",
     synopsis: ""
@@ -43,23 +44,58 @@ class Books extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.title && this.state.author) {
-      API.saveBook({
-        title: this.state.title,
-        author: this.state.author,
-        synopsis: this.state.synopsis
-      })
-        .then(res => this.loadBooks())
+    if (this.state.title) {
+
+      API.getGoogle(this.state.title)
+
+      // API.saveBook({
+      //   title: this.state.title,
+      //   author: this.state.author,
+      //   synopsis: this.state.synopsis
+      
+        .then(res => {this.setState({searchResults: res.data.items}, () => console.log(this.state.searchResults))
         .catch(err => console.log(err));
-    }
+    })
   };
+  };
+  saveBook = (title, author, synopsis, image, link ) => {
+    API.saveBook({
+      title,
+      author,
+      synopsis,
+      image,
+      link
+    }).then(res => this.loadBooks())
+      .catch(err => console.log(err));
+  
+};
+
 
   render() {
     return (
       <Container fluid>
         <Jumbotron>
           <h1>(React) Google Books Search</h1>
+          <h4>Search for and Save Books of Interest</h4>
         </Jumbotron>
+        <Row>
+          <Col size="md-12">
+          <form>
+              <Input
+                value={this.state.title}
+                onChange={this.handleInputChange}
+                name="title"
+                placeholder="Title (required)"
+              />
+              <FormBtn
+                disabled={!(this.state.title)}
+                onClick={this.handleFormSubmit}
+              >
+                Search Book
+              </FormBtn>
+            </form>
+          </Col>
+        </Row>
         <Row>
           <Col size="md-12">
             {this.state.books.length ? (
