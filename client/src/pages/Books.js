@@ -14,7 +14,8 @@ class Books extends Component {
     searchResults: [],
     title: "",
     author: "",
-    synopsis: ""
+    synopsis: "", 
+    id: ""
   };
 
   componentDidMount() {
@@ -22,10 +23,10 @@ class Books extends Component {
   }
 
   loadBooks = () => {
-    API.getBooks()
-      .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
-      )
+    API.getBooks(this.state.id) // this method gets all the books and what we are trying to do on your page currently is get a specific book so it is failing because it doesn't know what exactly we are looking for
+      .then(res => {
+        this.setState({ books: res.data })
+      })
       .catch(err => console.log(err));
   };
 
