@@ -55,8 +55,10 @@ class Books extends Component {
       //   synopsis: this.state.synopsis
       
         .then(res => {this.setState({searchResults: res.data.items}, () => console.log(this.state.searchResults))
-        .catch(err => console.log(err));
     })
+    
+        .catch(err => console.log(err));
+        // console.log(this.state.books)
   };
   };
   saveBook = (title, author, synopsis, image, link ) => {

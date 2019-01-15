@@ -9,7 +9,7 @@ import "./App.css";
 
 class App extends Component {
   render() {
-    console.log(`${process.env.REACT_APP_API_KEY}`)
+    // console.log(`${process.env.REACT_APP_API_KEY}`)
     return (
       <Router>
         <div>

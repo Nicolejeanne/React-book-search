@@ -1,12 +1,14 @@
 import axios from "axios";
-
-
+// const env = require('dotenv').config();
+require('dotenv').config({ path: '../../../.env' })
+// console.log(env)
 export default {
   // Gets all books
   getBooks: function() {
     return axios.get("/api/books");
   },
   getGoogle: function(title){
+    console.log(process.env)
     return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${title}&key=${process.env.REACT_APP_API_KEY}`)
   },
   // Gets the book with the given id
